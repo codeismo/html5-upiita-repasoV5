@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Canvas Paint</title>
+        <style>
+			#lienzo {
+				border-width: 1px;
+				border-style: solid;
+			}
+			.tipo-color {
+				cursor: hand;
+				cursor: pointer;
+				float: left;
+				width: 40px;
+				height: 40px;
+			}
+        </style>
+        <script src="../javascript/jquery-1.11.1.js"></script>
+        <script>
+			$(function() {
+				//variables globales
+				var xInicial = 0;
+				var yInicial = 0;
+				
+				//objeto de jQuery
+				var canvasJQ = $("#lienzo");
+
+				//calculamos la posicion (coordenadas) del canvas en el documento con jquery
+				var canvasPosY = canvasJQ.offset().top;
+				var canvasPosX = canvasJQ.offset().left;
+
+				//obtenemos el contexto
+				var canvasDOM = canvasJQ[0];
+				var contexto = canvasDOM.getContext("2d");
+				
+				//defino las propiedades de la linea que se va a pintar
+				contexto.strokeStyle = "green";
+				contexto.lineWidth = 10;
+				contexto.lineCap = "round";
+
+				//escuchamos el evento mouseover sobre el canvas
+				canvasJQ.mouseover(function(evento){
+				    //obtenemos las coordenadas iniciales de acuerdo al canvas
+				    xInicial = evento.pageX - canvasPosX;
+				    yInicial = evento.pageY - canvasPosY; 
+				});
+
+                //escuchamos el evento mousemove sobre el canvas
+                canvasJQ.mousemove(function(evento){
+                    //obtenemos las coordenadas finales de acuerdo al canvas
+                    xFinal = evento.pageX - canvasPosX;
+                    yFinal = evento.pageY - canvasPosY;
+                    //pintamos la linea
+                    contexto.beginPath();
+                    contexto.moveTo(xInicial, yInicial);
+                    contexto.lineTo(xFinal, yFinal);  
+                    contexto.stroke();  
+                    //actualizamos las coordenadas iniciales
+                    xInicial = xFinal;
+                    yInicial = yFinal;           
+                });
+			});
+        </script>
+    </head>
+    <body>
+        <canvas id="lienzo" width="500" height="300" ></canvas>
+        <div>
+            <div class="tipo-color" style="background-color:green;"></div>
+            <div class="tipo-color" style="background-color:red;"></div>
+            <div class="tipo-color" style="background-color:black;"></div>
+            <div class="tipo-color" style="background-color:orange;"></div>
+            <div class="tipo-color" style="background-color:#FFFF00;"></div>
+            <div class="tipo-color" style="background-color:#F43059;"></div>
+            <div class="tipo-color" style="background-color:#ff00ff;"></div>
+            <div class="tipo-color" style="background-color:#9ecc3b;"></div>
+        </div>
+    </body>
+</html>

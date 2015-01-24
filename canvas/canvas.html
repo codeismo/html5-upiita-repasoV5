@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Ejemplo de creación de caminos</title>
+
+        <style type="text/css">
+			body {
+				text-align: center;
+			}
+
+			canvas {
+				border-style: solid;
+			}
+        </style>
+
+        <script src="../javascript/jquery-1.11.1.js"></script>
+
+        <script>
+			$(function() {
+				/*obtener el canvas DOM*/
+				var canvasJQ = $("canvas");
+				//objeto jQuery
+				var canvasDOM = canvasJQ[0];
+				//objeto DOM
+
+				/*obtener el contexto 2d*/
+				var contexto = canvasDOM.getContext("2d");
+
+				/*primero se definen los estilos
+				color, relleno, ancho y termacion de linea*/
+				//definir el color de línea y relleno
+				//definir el color de línea y relleno
+				contexto.strokeStyle = "red";
+				contexto.fillStyle = "green";
+				//definir el ancho en pixeles
+				contexto.lineWidth = 3;
+				//define como termina la linea
+				contexto.lineCap = "round";
+
+				/* dibujamos un camino */
+				//iniciando un camino
+				contexto.beginPath();
+				//punto inicial
+				contexto.moveTo(200, 50);
+				//siguiente punto
+				contexto.lineTo(350, 50);
+				contexto.lineTo(200, 250);
+				contexto.closePath();
+				//continuamos dibujando el camino
+				contexto.moveTo(100, 300);
+				contexto.lineTo(100, 400);
+				contexto.stroke();
+				contexto.fill();
+				
+				//cerramos el camino
+				//pintamos su contorno
+				//rellenamos la figura
+
+				/*cerramos el camino y lo rellenamos*/
+				/*dibujamos un arco*/
+				contexto.beginPath();
+                contexto.rect(100, 400, 200, 100);
+                contexto.stroke();
+				/*dibujamos un rectangulo*/
+				//iniciar camino y al final pintar contronoy relleno
+                contexto.beginPath();
+                contexto.arc(300, 300, 100, 0, Math.PI, true);
+                contexto.stroke();
+                contexto.fill();
+
+				/*pintamos texto*/
+				//tamaño y tipo de letra
+				contexto.font="100px Arial";
+				contexto.textAlign= "center";
+
+				contexto.strokeText("Hola Mundo", 50, 500);
+				contexto.fillText("Hola Mundo", 50, 500);
+                                				//alineación
+		
+				//texto con relleno y posición
+				//texto con contorno y posición
+				//rellenamos el texto
+				//pintamos su contorno
+
+			});
+        </script>
+
+    </head>
+    <body>
+
+        <canvas width="600" height="600">
+            Tu navegador no soporta Canvas
+        </canvas>
+
+    </body>
+</html>

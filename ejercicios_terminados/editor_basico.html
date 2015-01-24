@@ -1,0 +1,75 @@
+<!doctype HTML>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Editor de Memes</title>
+        <style type="text/css">
+			body {
+				text-align: center;
+			}
+
+			canvas {
+				border-style: solid;
+			}
+        </style>
+
+        <script src="../javascript/jquery-1.11.1.js"></script>
+        <script>
+			$(function() {
+				var elCanvas = $("canvas")[0];
+				var contexto = elCanvas.getContext("2d");
+
+				//cargo la imagen del grumpy cat
+				var imagen = new Image();
+				imagen.src = "../imagenes/grumpy_cat.jpg";
+                //ancho de 400 y alto de 500
+				imagen.onload = function() {
+					contexto.drawImage(imagen, 0, 0, 400, 500);
+				};
+
+				//Escucho el evento keyup en las cajas mensajes
+				$(".mensajes").keyup(function(evento) {
+					//pinto de nuevo la imagen del gatito
+					contexto.drawImage(imagen, 0, 0, 400, 500);
+					//Defino los estilos de texto 
+					//tmaño 60px letra arial
+					//centrada relleno blanco controno negro
+					contexto.font = "60px Arial";
+					contexto.strokeStyle = "black";
+					contexto.fillStyle = "white";
+					contexto.textAlign = "center";
+					//obtengo el valor de los cuadros de texto
+					var textoArriba = $("#mensaje-arriba").val();
+					var textoAbajo = $("#mensaje-abajo").val();
+					//pintamos los textos arriba y abajo, con relleno y con borde
+					//arriba 200, 75
+					//abajo 200, 470
+					contexto.fillText(textoArriba, 200, 75);
+					contexto.strokeText(textoArriba, 200, 75);
+					contexto.fillText(textoAbajo, 200, 470);
+                    contexto.strokeText(textoAbajo, 200, 470);
+				});
+
+			});
+        </script>
+
+    </head>
+    <body>
+
+        <canvas width="400" height="500">
+            Tu navegador no soporta Canvas
+        </canvas>
+        <p>
+            Mensaje Arriba
+            <input id="mensaje-arriba" class="mensajes" type="text" />
+        </p>
+        <p>
+            Mensaje Abajo
+            <input id="mensaje-abajo" class="mensajes" type="text" />
+        </p>
+        <p>
+            <a id="link-guardar" href="#">Guardar la imagen!</a>
+        </p>
+
+    </body>
+</html>

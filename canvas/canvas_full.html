@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Ejemplo de creación de caminos</title>
+        <style type="text/css">
+			body {
+				text-align: center;
+			}
+
+			canvas {
+				border-style: solid;
+			}
+        </style>
+        <script src="../javascript/jquery-1.10.2.min.js"></script>
+        <script>
+			$(function() {
+				/*obtener el canvas DOM*/
+				var canvasDOM = $("canvas")[0];
+				/*obtener el contexto*/
+				var contexto = canvasDOM.getContext("2d");
+				/*primero se definen los estilos
+				 color, relleno, ancho y termacion de linea*/
+				contexto.strokeStyle = "red";
+				contexto.fillStyle = "green";
+				contexto.lineWidth = 3;
+				contexto.lineCap = "square";
+				/* dibujamos un camino */
+				contexto.beginPath();
+				contexto.moveTo(100, 100);
+				contexto.lineTo(250, 250);
+				/*continuamos dibujando el camino*/
+				contexto.lineTo(100,250);
+				/*cerramos el camino y lo rellenamos*/
+				contexto.closePath();
+				contexto.fill();
+				contexto.stroke();
+				/*dibujamos un arco*/
+				contexto.beginPath();
+				contexto.arc(300, 300, 100, 0, Math.PI, false);
+				contexto.stroke();
+				/*dibujamos un rectangulo*/
+				contexto.beginPath();
+				contexto.rect(400, 400, 200, 100);
+				contexto.fill();
+                contexto.stroke();
+                /*pintamos texto*/
+               contexto.font="60px Arial";
+               contexto.textAlign="left";
+               contexto.fillText("Hola Mundo", 400, 150); 
+               contexto.strokeText("Hola Mundo", 400, 150);               
+			});
+        </script>
+    </head>
+    <body>
+
+        <canvas width="600" height="600">
+            Tu navegador no soporta Canvas
+        </canvas>
+
+    </body>
+</html>
